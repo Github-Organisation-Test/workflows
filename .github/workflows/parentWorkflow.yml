@@ -15,3 +15,17 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
+
+      - name: Create screenshot
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-screenshot
+          path: cypress/screenshots
+
+      - name: Create artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-video
+          path: cypress/videos
